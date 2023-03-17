@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Authentication demo</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+          form {
+            padding: 1em;
+            background: #eee;
+            margin: 1em;
+            display: inline-block;
+          }
+
+          #login {
+            background: #d0ffe0;
+          }
+
+          #register {
+            background: #ffd0f0;
+          }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>Authentication via MongoDB and Node</h1>
+            <section>
+                <div>
+                    <form id="login" method="post" action="/api/login.js">
+                        <p>
+                            <label>Username:</label><br>
+                            <input name="username"></p>
+                        <p>
+                            <label>Password:</label><br>
+                            <input type="password" name="password">
+                        </p>
+                        <button>Login</button>
+                    </form>
+
+                    <form id="register" method="post" action="/api/register.js">
+                      <p>
+                          <label>Username:</label><br>
+                          <input name="username"></p>
+                      <p>
+                          <label>Password:</label><br>
+                          <input name="pass">
+                      </p>
+                      <button>Register</button>
+                  </form>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
