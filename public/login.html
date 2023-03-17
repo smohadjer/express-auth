@@ -27,7 +27,7 @@
             <h1>Authentication via MongoDB and Node</h1>
             <section>
                 <div>
-                    <form id="login" method="post" action="/api/login.js">
+                    <form id="login" method="post" action="/api/login">
                         <p>
                             <label>Username:</label><br>
                             <input name="username"></p>
@@ -38,13 +38,13 @@
                         <button>Login</button>
                     </form>
 
-                    <form id="register" method="post" action="/api/register.js">
+                    <form id="register" method="post" action="/api/register">
                       <p>
                           <label>Username:</label><br>
                           <input name="username"></p>
                       <p>
                           <label>Password:</label><br>
-                          <input name="pass">
+                          <input type="password" name="password">
                       </p>
                       <button>Register</button>
                   </form>
