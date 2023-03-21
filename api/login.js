@@ -40,8 +40,17 @@ export default async (req, res) => {
 
     res.setHeader('Content-Type', 'text/plain')
     if (userFound) {
-      res.end('Login Succeeded!');
+      res.writeHead(302, {
+        'Location': '/profile.html'
+        //add other headers here...
+      });
+      res.end();
+      //res.end('Login Succeeded!');
     } else {
+      res.writeHead(302, {
+        'Location': '/login.html'
+        //add other headers here...
+      });
       res.end('Login Failed!');
     }
   }
