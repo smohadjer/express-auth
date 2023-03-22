@@ -1,51 +1,67 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import login from './api/login.js';
 import register from './api/register.js';
-//import cors from 'cors';
-import bodyParser from 'body-parser';
-
-// fix for missing __dirname when using ES modules in node.js
-import { fileURLToPath } from 'url';
-import path from 'path';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 8000;
+
+// for static assets and publicly accessible pages
+app.use(express.static('public'));
+
+// for parsing forms data such as forms sent via application/x-www-form-urlencoded or json
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.use(cookieParser());
+
+// api routes
+app.post('/api/login', (req, res) => {
+  login(req, res);
+});
+
+app.post('/api/register', (req, res) => {
+  register(req, res);
+});
+
+app.post('/api/logout', (req, res) => {
+  res.clearCookie('loggedIn');
+  res.redirect('/login.html');
+});
+
+// middleware for cookie-based authentication
 const authenticator = (req, res, next) => {
   console.log('authenticating...');
-  const userIsAuthenticated = true;
-  if (userIsAuthenticated) {
+
+  if (req.cookies && req.cookies.loggedIn) {
     next();
   } else {
     res.redirect('/login.html');
   }
 }
 
-app.use(express.static('public'));
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-
 app.use(authenticator);
+
+app.get('/protected(.html)?', (req, res) => {
+  res.sendFile('protected.html', {root: './private'});
+});
+
+app.get('/private(.html)?', (req, res) => {
+  res.sendFile('private.html', {root: './private'});
+});
+
+app.all('*', (req, res) => {
+  res.status(404);
+  if (req.accepts('html')) {
+    res.sendFile('404.html', {root: './public'});
+  } else if (req.accepts('json')) {
+    res.json({ "error": "404 Not Found" });
+  } else {
+    res.type('txt').send("404 Not Found");
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server started at port ${port}`);
 });
 
-app.post('/api/login.js', (req, res) => {
-  login(req, res);
-});
-
-app.post('/api/register.js', (req, res) => {
-  register(req, res);
-});
-
-app.get('/protected-page(.html)?', (req, res) => {
-  console.log('User is logged in!');
-  res.sendFile('./views/protected-page.html', { root: __dirname });
-});
-
-app.get('/*', (req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
-});

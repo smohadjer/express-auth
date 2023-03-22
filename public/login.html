@@ -25,33 +25,34 @@
     <body>
         <main>
             <h1>Authentication via MongoDB and Node</h1>
-            <p>Example of a <a href="/protected-page">page behind login wall</a>. If you are not logged in, server will redirect you to the login page.</p>
-            <p>Example of a <a href="/test.html">page that is NOT behind login wall</a></p>
-            <p>Link to <a href="https://github.com/smohadjer/nodejs-authentication">GitHub repository</a></p>
+            <p><a href="/protected">Page behind login wall</a></p>
+            <p><a href="/private">Another  page behind login wall</a></p>
+            <p><a href="/test.html">Page that is NOT behind login wall</a></p>
+            <p><a href="https://github.com/smohadjer/nodejs-authentication">GitHub Repository</a></p>
             <section>
-                <div>
-                    <form id="login" method="post" action="/api/login">
-                        <p>
-                            <label>Username:</label><br>
-                            <input name="username"></p>
-                        <p>
-                            <label>Password:</label><br>
-                            <input type="password" name="password">
-                        </p>
-                        <button>Login</button>
-                    </form>
-
-                    <form id="register" method="post" action="/api/register">
-                      <p>
-                          <label>Username:</label><br>
-                          <input name="username"></p>
-                      <p>
-                          <label>Password:</label><br>
-                          <input type="password" name="password">
-                      </p>
-                      <button>Register</button>
-                  </form>
-                </div>
+                <form id="login" method="post" action="/api/login">
+                    <p>
+                        <label>Username:</label><br>
+                        <input name="username"></p>
+                    <p>
+                        <label>Password:</label><br>
+                        <input type="password" name="password">
+                    </p>
+                    <button>Login</button>
+                </form>
+                <form id="register" method="post" action="/api/register">
+                    <p>
+                        <label>Username:</label><br>
+                        <input name="username"></p>
+                    <p>
+                        <label>Password:</label><br>
+                        <input type="password" name="password">
+                    </p>
+                    <button>Register</button>
+                </form>
+                <form id="logout" method="post" action="/api/logout">
+                    <button>Logout</button>
+                </form>
             </section>
         </main>
     </body>

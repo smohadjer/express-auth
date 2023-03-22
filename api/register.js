@@ -24,6 +24,6 @@ async function run(req) {
 
 export default async (req, res) => {
     await run(req);
-    return res.send('You are now registered.');
+    res.redirect('/login.html');
 }
 

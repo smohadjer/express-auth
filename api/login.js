@@ -40,8 +40,11 @@ export default async (req, res) => {
 
     res.setHeader('Content-Type', 'text/plain')
     if (userFound) {
+      res.cookie('loggedIn', true, {
+        expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
+      });
       res.writeHead(302, {
-        'Location': '/profile.html'
+        'Location': '/protected'
         //add other headers here...
       });
       res.end();
