@@ -32,6 +32,7 @@ app.post('/api/logout', (req, res) => {
 // middleware for cookie-based authentication
 const authenticator = (req, res, next) => {
   console.log('authenticating...');
+  console.log(req.cookies.loggedIn);
 
   if (req.cookies && req.cookies.loggedIn) {
     next();
