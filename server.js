@@ -41,7 +41,13 @@ const authenticator = (req, res, next) => {
   }
 }
 
+const testMiddleware = (req, res, next) => {
+  console.log('a second middleware...');
+  next();
+}
+
 app.use(authenticator);
+app.use(testMiddleware);
 
 app.get('/protected(.html)?', (req, res) => {
   res.sendFile('protected.html', {root: './private'});
