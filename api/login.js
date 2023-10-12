@@ -44,7 +44,7 @@ export default async (req, res) => {
         expires: new Date(Date.now() + 8 * 60 * 60 * 1000) // expires in 8 hours
       });
       res.writeHead(302, {
-        'Location': '/protected'
+        'Location': '/private/protected'
         //add other headers here...
       });
       res.end();
