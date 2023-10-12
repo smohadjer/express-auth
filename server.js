@@ -9,7 +9,7 @@ const port = 8000;
 // for static assets and publicly accessible pages
 app.use(express.static('public'));
 
-// for parsing forms data such as forms sent via application/x-www-form-urlencoded or json
+// for parsing forms data such as forms sent via application/x-www-form-urlencoded or application/json
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -49,12 +49,18 @@ const testMiddleware = (req, res, next) => {
 app.use(authenticator);
 app.use(testMiddleware);
 
+/*
 app.get('/protected(.html)?', (req, res) => {
   res.sendFile('protected.html', {root: './private'});
 });
 
 app.get('/private(.html)?', (req, res) => {
   res.sendFile('private.html', {root: './private'});
+});
+*/
+
+app.get('/private/*', (req, res) => {
+  res.sendFile(req.url, { root: '.'});
 });
 
 app.all('*', (req, res) => {

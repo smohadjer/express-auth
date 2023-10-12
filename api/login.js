@@ -15,7 +15,7 @@ async function run(username, password) {
       projection: { _id: 0, username: 1 },
     };
 
-    const result = await users.findOne(query, {options});
+    const result = await users.findOne(query, options);
 
    if (result) {
      return true;
@@ -36,12 +36,12 @@ export default async (req, res) => {
   if (req.body) {
     const { username, password } = req.body;
 
-    const userFound = await run(username, password);
+    const userIsFound = await run(username, password);
 
     res.setHeader('Content-Type', 'text/plain')
-    if (userFound) {
+    if (userIsFound) {
       res.cookie('loggedIn', true, {
-        expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
+        expires: new Date(Date.now() + 8 * 60 * 60 * 1000) // expires in 8 hours
       });
       res.writeHead(302, {
         'Location': '/protected'
