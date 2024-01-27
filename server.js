@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import login from './api/login.js';
+import logout from './api/logout.js';
 import register from './api/register.js';
 
 const app = express();
@@ -25,8 +26,7 @@ app.post('/api/register', (req, res) => {
 });
 
 app.post('/api/logout', (req, res) => {
-  res.clearCookie('loggedIn');
-  res.redirect('/login.html');
+  logout(req, res);
 });
 
 // middleware for cookie-based authentication
